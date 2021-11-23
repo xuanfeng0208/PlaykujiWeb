@@ -18,7 +18,7 @@
           </div>
           <div>
             <h3> {{ item.name }}</h3>
-            <h5>發售日期:2021/11/22</h5>
+            <h5>發售日期: {{ item.saleDate.slice( 0 , 10 ) }}</h5>
             <!-- <h5>售價:{{ index }}元</h5> -->
           </div>
         </div>
@@ -73,7 +73,7 @@ export default {
             getData().then(res=> {
               // res=test
               this.product=res.data
-              // console.log(res)
+              console.log(res)
               // console.log(this.product.data[0].id)
             })
             .catch(error=>{
