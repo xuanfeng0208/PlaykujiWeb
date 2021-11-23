@@ -1,7 +1,101 @@
 <template>
-  <div class="kujiset">
-    <router-link to="/">回首頁</router-link>
-    <h1>設定頁</h1>
-    
+  <div id="kujiset">
+    <div id="mainkuji">
+      <picture>
+        <img :src="this.product.pictureUrl" alt="">
+      </picture>
+      <h3>{{this.product.name}}</h3>
+      <h5>發售日期: {{ this.product.saleDate }}</h5>
+      <p>數量: {{ this.product.count }} 抽</p>
+    </div>
+    <div class="productAwards">
+      <div class="pa_list" v-for="item in product.productAwards" :key="item">
+        <div>
+          <picture>
+            <img :src="item.pictureUrl" alt="">
+          </picture>
+        </div>
+        <div>
+          <p>{{item.award}} {{item.name}}</p><br>
+          <p>數量:{{item.count}}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+<script>
+import { productID } from '@/api/index.js';
+
+export default {
+  name: 'Kujiset',
+  components: {
+
+  },
+  data() {
+    return {
+      product:[],
+    }
+  },
+   mounted() {
+        this.getProduct();
+    },
+  methods: {
+    getProduct() {
+    // console.log(this.$route.query.id) 
+    var id = this.$route.query.id
+      productID(id).then(res=> {
+        // this.product=res.data
+        // console.log(this.$route.query.id)
+        this.product=res.data
+        console.log(this.product.productAwards)
+        // console.log(this.product.data[0].id)
+      })
+  }
+  // console.log(this.$route.query.id) 
+}
+  
+}
+</script>
+
+<style scoped>
+#kujiset{
+  /* width: 1440px; */
+  max-width: 1440px;
+  margin: 0 auto;
+  background: #EEE;
+  /* height: 2000px; */
+}
+#mainkuji{
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align: center;
+}
+#mainkuji img{
+  width: 100%;
+}
+.productAwards{
+  display: flex;
+  /* flex-direction:column; */
+  /* justify-content:center; */
+  flex-wrap: wrap;
+  text-align: center;
+}
+.pa_list{
+  width: 33.333%;
+}
+.pa_list p{
+  display: inline-block;
+}
+.pa_list picture{
+  /* width: 33.333%; */
+}
+.pa_list picture img{
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .pa_list{
+    width: 50%;
+  }
+}
+</style>

@@ -10,10 +10,10 @@
       </div>
     <!-- <router-link to="/Kujiset"> -->
       <div id="flexbox">
-        <div class="kuji_list" v-for="item in product" :key="item.id">
+        <div class="kuji_list" v-for="item in product" :key="item.id" @click="getProductID(item.id)">
           <div class="kuji_list_imgbox" >
             <figure>
-              <img :src="item.pictureUrl" alt="">
+              <img :src="item.pictureUrl" :alt="item.name">
             </figure>
           </div>
           <div>
@@ -38,30 +38,7 @@ export default {
    
   data() {
     return {
-      
-      // items: [
-      //   { 
-      //     img: require('../assets/1.jpg'),
-      //     name:'寶可夢珍珠鑽石一番賞',
-      //     date:'2021/11/18',
-      //     Price:'300',
-      //   }, 
-      //   { 
-      //     img: require('../assets/1.jpg'),
-      //     name:'寶可夢珍珠鑽石一番賞2',
-      //     date:'2021/11/19',
-      //     Price:'3000',
-      //   },
-      //   { 
-      //     img: require('../assets/1.jpg'),
-      //     name:'寶可夢珍珠鑽石一番賞3',
-      //     date:'2021/11/19',
-      //     Price:'3000',
-      //   },
-      // ],
       product:[],
-
-      
     }
   },
   mounted() {
@@ -69,17 +46,21 @@ export default {
     },
    methods: {
         getProduct(){
-          // console.log(1)
             getData().then(res=> {
-              // res=test
               this.product=res.data
-              console.log(res)
+              // console.log(res)
               // console.log(this.product.data[0].id)
             })
             .catch(error=>{
                 console.log(error)
             });
          },
+        getProductID(id){
+          // this.$router.push("/Kujiset")
+          this.$router.push({ path: '/Kujiset', query: {id}})
+          // console.log(id)
+          // console.log("123")
+        },
     },
 }
 
@@ -91,7 +72,7 @@ export default {
   max-width: 1440px;
   margin: 0 auto;
   /* background: #EEE; */
-  height: 2000px;
+  /* height: 2000px; */
 }
 #search_bar{
   background: #eee;
