@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f1d6:function(t,e,n){"use strict";n.r(e);var c=n("7a23"),r={class:"kujiset"},u=Object(c["g"])("回首頁"),b=Object(c["f"])("h1",null,"設定頁",-1);function o(t,e){var n=Object(c["v"])("router-link");return Object(c["q"])(),Object(c["e"])("div",r,[Object(c["h"])(n,{to:"/"},{default:Object(c["A"])((function(){return[u]})),_:1}),b])}var a=n("6b0d"),i=n.n(a);const s={},d=i()(s,[["render",o]]);e["default"]=d}}]);
-//# sourceMappingURL=about.6626040d.js.map
