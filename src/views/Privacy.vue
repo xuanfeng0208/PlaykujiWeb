@@ -53,7 +53,7 @@
 
 <script>
 export default {
-
+  name: 'Privacy',
 }
 </script>
 
@@ -61,6 +61,6 @@ export default {
 #Privacy{
   max-width: 1440px;
   margin: 0 auto;
-font-size: 20px;
+  font-size: 20px;
 }
 </style>
