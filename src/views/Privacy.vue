@@ -1,5 +1,6 @@
 <template>
   <div id="Privacy">
+    <h3>隱私權</h3>
 <p>
 非常歡迎您光臨「玩一番賞模擬器」（以下簡稱本網站），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：
 </p>
@@ -48,12 +49,17 @@
 七、隱私權保護政策之修正
 本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。
 </p>
+<Button></Button>
 </div>
 </template>
 
 <script>
+import Button from '@/component/Button.vue';
 export default {
   name: 'Privacy',
+  components: {
+    Button,
+  },
 }
 </script>
 

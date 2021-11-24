@@ -31,11 +31,11 @@
 
 <script>
 import { getData } from '@/api/index.js';
-// import Footer from './component/Footer.vue';
+import Footer from '@/component/Footer.vue';
 export default {
   name: 'Home',
   components: {
-    // Footer,
+    Footer,
   },
    
   data() {

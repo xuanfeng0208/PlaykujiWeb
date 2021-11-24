@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Kujiset from '../views/Kujiset.vue'
-import Privacy from '../views/Kujiset.vue'
+import Privacy from '../views/Privacy.vue'
 
 const routes = [
   {
