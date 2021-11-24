@@ -12,7 +12,7 @@
       <div class="pa_list" v-for="item in product.productAwards" :key="item">
         <div>
           <picture>
-            <img :src="item.pictureUrl" alt="">
+            <img :src="item.pictureUrl" :alt="item.name">
           </picture>
         </div>
         <div>
@@ -43,11 +43,13 @@ export default {
     getProduct() {
     // console.log(this.$route.query.id) 
     var id = this.$route.query.id
+    // console.log(id)
       productID(id).then(res=> {
         // this.product=res.data
         // console.log(this.$route.query.id)
         this.product=res.data
-        console.log(this.product.productAwards)
+        this.product.saleDate=this.product.saleDate.slice( 0 , 10 )
+        // console.log(this.product.productAwards)
         // console.log(this.product.data[0].id)
       })
   }

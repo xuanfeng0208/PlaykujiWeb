@@ -25,15 +25,17 @@
       </div> 
     <!-- </router-link>  -->
     <!-- <div>廣告</div> -->
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import { getData } from '@/api/index.js';
+// import Footer from './component/Footer.vue';
 export default {
   name: 'Home',
   components: {
-
+    // Footer,
   },
    
   data() {

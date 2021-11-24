@@ -1,7 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+// import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Kujiset from '../views/Kujiset.vue'
-import Privacy from '../views/Privacy.vue'
+import Privacy from '../views/Kujiset.vue'
 
 const routes = [
   {
@@ -25,7 +26,8 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
+  // history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
