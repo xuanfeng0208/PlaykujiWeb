@@ -1,5 +1,6 @@
 <template>
   <div id="kujiset">
+    <Header></Header>
     <div id="mainkuji">
       <picture>
         <img :src="this.product.pictureUrl" alt="">
@@ -21,19 +22,27 @@
         </div>
       </div>
     </div>
+<Button :BtnData="BtnData" :RouterData="RouterData"></Button>
+<Footer></Footer>
   </div>
 </template>
 <script>
 import { productID } from '@/api/index.js';
-
+import Header from '@/component/Header.vue';
+import Footer from '@/component/Footer.vue';
+import Button from '@/component/Button.vue';
 export default {
   name: 'Kujiset',
   components: {
-
+    Header,
+    Footer,
+    Button,
   },
   data() {
     return {
       product:[],
+      BtnData:"返回首頁",
+      RouterData:"/"
     }
   },
    mounted() {

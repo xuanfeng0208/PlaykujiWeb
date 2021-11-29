@@ -14,5 +14,6 @@ export default {
     line-height: 50px;
     height: 50px;
     background: #eee;
+    margin: 0;
 }
 </style>

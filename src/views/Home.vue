@@ -2,12 +2,7 @@
   <div id="home">
     <!-- <router-link to="/Kujiset">到設定頁</router-link> -->
     <!-- <h1>選擇頁</h1> -->
-    <div id="search_bar">
-      <figure>
-            <img src="../assets/favicon.png" alt="">
-      </figure>
-      <h1>玩一番賞模擬器</h1>      
-      </div>
+    <Header></Header>
     <!-- <router-link to="/Kujiset"> -->
       <div id="flexbox">
         <div class="kuji_list" v-for="item in product" :key="item.id" @click="getProductID(item.id)">
@@ -31,10 +26,12 @@
 
 <script>
 import { getData } from '@/api/index.js';
+import Header from '@/component/Header.vue';
 import Footer from '@/component/Footer.vue';
 export default {
   name: 'Home',
   components: {
+    Header,
     Footer,
   },
    
@@ -76,26 +73,14 @@ export default {
   /* background: #EEE; */
   /* height: 2000px; */
 }
-#search_bar{
-  background: #eee;
-  width: 100%;
-  max-width: 1440px;
-  height: 50px;
-  position:fixed;
-  top:0;
-  font-size: 30px;
-  text-align: center;
-  display: flex;
-  justify-content:center;
-  align-items:center;
-}
+
 #search_bar h1{
   font-size: 30px;
 }
 #flexbox{
   display: flex;
   flex-wrap:wrap; 
-  padding: 50px 0 0 0;
+  /* padding: 50px 0 0 0; */
 }
 .kuji_list{
   width: 50%;
