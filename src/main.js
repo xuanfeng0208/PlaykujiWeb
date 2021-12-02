@@ -6,4 +6,4 @@ import 'normalize.css/normalize.css'
 createApp(App).use(router).mount('#app')
 
 // export const bus = new Vue();
-// console.log = function(){}
+console.log = function(){}

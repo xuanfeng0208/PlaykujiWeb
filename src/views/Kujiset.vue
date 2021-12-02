@@ -8,9 +8,10 @@
       <h3>{{this.product.name}}</h3>
       <h5>發售日期: {{ this.product.saleDate }}</h5>
       <p>數量: {{ this.product.count }} 抽</p>
+      <p>剩餘數量: {{ this.remain }} 抽</p>
     </div>
     <div class="productAwards">
-      <div class="pa_list" v-for="item in product.productAwards" :key="item">
+      <div class="pa_list" v-for="(item, index) in product.productAwards" :key="index">
         <div>
           <picture>
             <img :src="item.pictureUrl" :alt="item.name">
@@ -18,12 +19,28 @@
         </div>
         <div>
           <p>{{item.award}} {{item.name}}</p><br>
-          <p>數量:{{item.count}}</p>
+          <p>總數量:{{item.count}}</p><br>
+          <p>剩餘數量:{{item.remain}}</p><br>
+          <p>自訂數量</p>
+          <p class="plus qtybox" @click="plus(index)" >+1</p>
+          <p class="minus qtybox" @click="minus(index)">-1</p><br>
         </div>
       </div>
     </div>
-<Button :BtnData="BtnData" :RouterData="RouterData"></Button>
-<Footer></Footer>
+    <div class="lottery"  @click="lottery()" v-if="!result">
+      抽
+    </div> 
+    <div class="lottery_result" v-if="result">
+      <p>抽到的獎項是</p>
+      <p>{{this.prize_result}}</p>
+      <p>剩餘數量: {{ this.remain }} 抽</p>
+      <div class="result_btn">
+        <div class="result_box" @click="result=false">結束</div>
+        <div class="result_box" @click="lottery()">繼續</div>
+      </div>      
+    </div>   
+  <Button :BtnData="BtnData" :RouterData="RouterData"></Button>
+  <Footer></Footer>
   </div>
 </template>
 <script>
@@ -41,8 +58,12 @@ export default {
   data() {
     return {
       product:[],
+      remain:[],
+      prize:[],
       BtnData:"返回首頁",
-      RouterData:"/"
+      RouterData:"/",
+      result:false,
+      prize_result:''
     }
   },
    mounted() {
@@ -50,21 +71,60 @@ export default {
     },
   methods: {
     getProduct() {
-    // console.log(this.$route.query.id) 
     var id = this.$route.query.id
-    // console.log(id)
       productID(id).then(res=> {
-        // this.product=res.data
-        // console.log(this.$route.query.id)
         this.product=res.data
         this.product.saleDate=this.product.saleDate.slice( 0 , 10 )
-        // console.log(this.product.productAwards)
-        // console.log(this.product.data[0].id)
+        console.log(this.product)
+        for(var x=0;x < this.product.productAwards.length;x++){
+          this.product.productAwards[x].remain=this.product.productAwards[x].count
+        }
+        this.remain = this.product.count
       })
-  }
-  // console.log(this.$route.query.id) 
+      
+  },
+  plus(index){
+    var num = this.product.productAwards
+    num[index].remain<num[index].count?num[index].remain+=1:num[index].remain
+    this.prize_check()
+  },
+  minus(index){
+    var num = this.product.productAwards
+    num[index].remain>0?num[index].remain-=1:num[index].remain
+    this.prize_check()
+  },
+  prize_check (){
+    var check = this.product.productAwards
+    this.prize=[]
+    // console.log(check.length)
+    for(var x=0;x<check.length;x++){
+      for(var y=0;y<check[x].remain;y++){
+        if(check[x].isPlay==true){ 
+          this.prize.push(check[x].award)
+          // console.log(this.prize)
+        }
+      }
+    }
+    this.remain = this.prize.length
+  },
+  lottery(){
+    this.prize_check()
+    var check = this.product.productAwards
+    console.log('抽獎')
+    this.prize_result = this.prize[parseInt(Math.random()*this.prize.length)]
+    console.log(this.prize_result)
+    for(var x=0;x<check.length;x++){
+      if(check[x].award==this.prize_result){
+          console.log("相同")
+          console.log(check[x].remain)
+          check[x].remain=check[x].remain-1
+          this.prize_result=check[x].award+'賞   '+check[x].name
+      }
+    }
+    this.result=true
+  },
 }
-  
+
 }
 </script>
 
@@ -104,9 +164,70 @@ export default {
 .pa_list picture img{
   width: 100%;
 }
+.qtybox{
+  user-select: none;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  background: red;
+  margin: 0 5px;
+}
+.lottery{
+  position: fixed;
+  right: 0;
+  top: 80%;
+  width: 50px;
+  height: 50px;
+  background: red;
+  line-height: 50px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 30px;
+  user-select: none;
+  transition: .5s all;
+}
+.lottery:hover{
+  font-size: 40px;
+}
+.lottery_result{
+  position: fixed;
+  left: 25%;
+  top: 25%;
+  background: red;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  /* align-content:space-between; */
+  align-items: center;
+  justify-content: space-between ;
+}
+.result_btn{
+  display: flex; 
+}
+.result_box{
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  background: cyan;
+  user-select: none;
+  transition: .5s all;
+}
+.result_box:hover{
+  font-size: 30px;
+}
 @media (max-width: 768px) {
   .pa_list{
     width: 50%;
+  }
+  .lottery_result{
+    background: red;
+    left: 5%;
+    width: 90%;
+    height: 50%;
   }
 }
 </style>
