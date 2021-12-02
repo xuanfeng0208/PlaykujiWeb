@@ -121,6 +121,7 @@ export default {
           this.prize_result=check[x].award+'賞   '+check[x].name
       }
     }
+    this.prize_check()
     this.result=true
   },
 }
