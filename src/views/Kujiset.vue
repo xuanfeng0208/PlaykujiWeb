@@ -32,7 +32,8 @@
     </div> 
     <div class="lottery_result" v-if="result">
       <p>抽到的獎項是</p>
-      <p>{{this.prize_result}}</p>
+      <p class="prize_result">{{this.prize_result.Prize}}</p>
+      <img class="prize_img" :src="this.prize_result.pictureUrl" alt="">
       <p>剩餘數量: {{ this.remain }} 抽</p>
       <div class="result_btn">
         <div class="result_box" @click="result=false">結束</div>
@@ -112,13 +113,13 @@ export default {
     var check = this.product.productAwards
     console.log('抽獎')
     this.prize_result = this.prize[parseInt(Math.random()*this.prize.length)]
-    console.log(this.prize_result)
+    // console.log(this.prize_result)
     for(var x=0;x<check.length;x++){
       if(check[x].award==this.prize_result){
-          console.log("相同")
           console.log(check[x].remain)
+          // console.log('抽獎')
           check[x].remain=check[x].remain-1
-          this.prize_result=check[x].award+'賞   '+check[x].name
+          this.prize_result={"Prize":check[x].award+'賞   '+check[x].name,"pictureUrl":check[x].pictureUrl}
       }
     }
     this.prize_check()
@@ -154,7 +155,7 @@ export default {
   text-align: center;
 }
 .pa_list{
-  width: 33.333%;
+  width: 25%;
 }
 .pa_list p{
   display: inline-block;
@@ -219,6 +220,13 @@ export default {
 }
 .result_box:hover{
   font-size: 30px;
+}
+.prize_result{
+  font-size: 30px;
+  font-weight: 700;
+}
+.prize_img{
+  width: 200px;
 }
 @media (max-width: 768px) {
   .pa_list{
