@@ -31,14 +31,16 @@
       抽
     </div> 
     <div class="lottery_result" v-if="result">
-      <p>抽到的獎項是</p>
-      <p class="prize_result">{{this.prize_result.Prize}}</p>
-      <img class="prize_img" :src="this.prize_result.pictureUrl" alt="">
-      <p>剩餘數量: {{ this.remain }} 抽</p>
-      <div class="result_btn">
-        <div class="result_box" @click="result=false">結束</div>
-        <div class="result_box" @click="lottery()">繼續</div>
-      </div>      
+      <!-- <div> -->
+        <p>抽到的獎項是</p>
+        <p class="prize_result">{{this.prize_result.Prize}}</p>
+        <img class="prize_img" :src="this.prize_result.pictureUrl" alt="">
+        <p>剩餘數量: {{ this.remain }} 抽</p>
+        <div class="result_btn">
+          <div class="result_box" @click="result=false">結束</div>
+          <div class="result_box" @click="lottery()">繼續</div>
+        </div> 
+      <!-- </div>      -->
     </div>   
   <Button :BtnData="BtnData" :RouterData="RouterData"></Button>
   <Footer></Footer>
@@ -193,16 +195,19 @@ export default {
 }
 .lottery_result{
   position: fixed;
-  left: 25%;
-  top: 25%;
+  left: 50%;
+  top: 50%;
   background: red;
   width: 50%;
-  height: 50%;
+  margin-left:-25%;
+  margin-top:-25%;
+  /* height: 50%; */
   display: flex;
   flex-direction: column;
   /* align-content:space-between; */
   align-items: center;
   justify-content: space-between ;
+  /* flex-flow: column nowrap; */
 }
 .result_btn{
   display: flex; 
@@ -234,9 +239,10 @@ export default {
   }
   .lottery_result{
     background: red;
-    left: 5%;
+    /* left: 0%; */
     width: 90%;
-    height: 50%;
+    margin-left:-45%;
+    margin-top:-50%;
   }
 }
 </style>
