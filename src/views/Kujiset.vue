@@ -195,18 +195,20 @@ export default {
 }
 .lottery_result{
   position: fixed;
-  left: 50%;
-  top: 50%;
   background: red;
   width: 50%;
-  margin-left:-25%;
-  margin-top:-25%;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 80px auto ;
   /* height: 50%; */
   display: flex;
   flex-direction: column;
   /* align-content:space-between; */
   align-items: center;
   justify-content: space-between ;
+   /* padding: 10px; */
   /* flex-flow: column nowrap; */
 }
 .result_btn{
@@ -241,8 +243,7 @@ export default {
     background: red;
     /* left: 0%; */
     width: 90%;
-    margin-left:-45%;
-    margin-top:-50%;
+    margin: 10px auto ;
   }
 }
 </style>
