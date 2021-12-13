@@ -21,9 +21,11 @@
           <p>{{item.award}} {{item.name}}</p><br>
           <p>總數量:{{item.count}}</p><br>
           <p>剩餘數量:{{item.remain}}</p><br>
-          <p>自訂數量</p>
-          <p class="plus qtybox" @click="plus(index)" >+1</p>
-          <p class="minus qtybox" @click="minus(index)">-1</p><br>
+          <p>自訂數量</p><br>
+          <p class="qtybox" @click="plus(index)">+1</p>
+          <p class="qtybox" @click="minus(index)">-1</p><br>
+          <p class="qtybox" @click="fillup(index)">補滿</p>
+          <p class="qtybox" @click="zeroing(index)">歸零</p>
         </div>
       </div>
     </div>
@@ -94,6 +96,16 @@ export default {
   minus(index){
     var num = this.product.productAwards
     num[index].remain>0?num[index].remain-=1:num[index].remain
+    this.prize_check()
+  },
+  fillup(index){
+    var num = this.product.productAwards
+    num[index].remain=num[index].count
+    this.prize_check()
+  },
+  zeroing(index){
+    var num = this.product.productAwards
+    num[index].remain=0
     this.prize_check()
   },
   prize_check (){
@@ -174,7 +186,7 @@ export default {
   height: 20px;
   text-align: center;
   background: red;
-  margin: 0 5px;
+  margin: 5px 5px;
 }
 .lottery{
   position: fixed;
@@ -199,17 +211,16 @@ export default {
   width: 50%;
   left: 0;
   top: 0;
-  right: 0;
-  bottom: 0;
-  margin: 80px auto ;
-  /* height: 50%; */
+  /* right: 0;
+  bottom: 0; */
+  /* margin: auto ; */
+  margin-left: 25%;
   display: flex;
   flex-direction: column;
-  /* align-content:space-between; */
   align-items: center;
   justify-content: space-between ;
-   /* padding: 10px; */
   /* flex-flow: column nowrap; */
+  /* height: auto; */
 }
 .result_btn{
   display: flex; 
@@ -242,8 +253,8 @@ export default {
   .lottery_result{
     background: red;
     /* left: 0%; */
-    width: 90%;
-    margin: 10px auto ;
+    width: 100%;
+    margin: 10% auto ;
   }
 }
 </style>
