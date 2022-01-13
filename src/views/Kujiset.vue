@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <div class="lottery"  @click="lottery()" v-if="!result">
+    <div class="lottery"  @click="lottery()" v-if="(!result)&result_num">
       抽
     </div> 
     <div class="lottery_result" v-if="result">
@@ -42,7 +42,7 @@
         <p>剩餘數量: {{ this.remain }} 抽</p>
         <div class="result_btn">
           <div class="result_box" @click="result=false">結束</div>
-          <div class="result_box" @click="lottery()">繼續</div>
+          <div class="result_box" @click="lottery()" v-if="result_num">繼續</div>
         </div> 
       <!-- </div>      -->
     </div>   
@@ -70,7 +70,8 @@ export default {
       BtnData:"返回首頁",
       RouterData:"/",
       result:false,
-      prize_result:''
+      prize_result:'',
+      result_num:true,
     }
   },
    mounted() {
@@ -136,6 +137,14 @@ export default {
       }
     }
     this.remain = this.prize.length
+    console.log(!this.result)
+    console.log(this.result_num)
+    console.log((!this.result)&this.result_num)
+    if(this.remain==0){
+      this.result_num=false
+    }else{
+      this.result_num=true
+    }
   },
   lottery(){
     this.prize_check()
@@ -145,10 +154,10 @@ export default {
     // console.log(this.prize_result)
     for(var x=0;x<check.length;x++){
       if(check[x].award==this.prize_result){
-          console.log(check[x].remain)
-          // console.log('抽獎')
-          check[x].remain=check[x].remain-1
-          this.prize_result={"Prize":check[x].award+'賞   '+check[x].name,"pictureUrl":check[x].pictureUrl}
+        console.log(check[x].remain)
+        // console.log('抽獎')
+        check[x].remain=check[x].remain-1
+        this.prize_result={"Prize":check[x].award+'賞   '+check[x].name,"pictureUrl":check[x].pictureUrl}
       }
     }
     this.prize_check()
