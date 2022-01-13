@@ -2,8 +2,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import 'normalize.css/normalize.css'
+// import { Swiper, SwiperSlide } from 'swiper/vue';
+// import 'swiper/css';
 
 createApp(App).use(router).mount('#app')
 
 // export const bus = new Vue();
-console.log = function(){}
+// console.log = function(){}

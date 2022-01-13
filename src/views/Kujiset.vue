@@ -9,6 +9,8 @@
       <h5>發售日期: {{ this.product.saleDate }}</h5>
       <p>數量: {{ this.product.count }} 抽</p>
       <p>剩餘數量: {{ this.remain }} 抽</p>
+      <p class="qtyall" @click="full()">補滿</p>
+      <p class="qtyall" @click="zero()">歸零</p>
     </div>
     <div class="productAwards">
       <div class="pa_list" v-for="(item, index) in product.productAwards" :key="index">
@@ -24,8 +26,8 @@
           <p>自訂數量</p><br>
           <p class="qtybox" @click="plus(index)">+1</p>
           <p class="qtybox" @click="minus(index)">-1</p><br>
-          <p class="qtybox" @click="fillup(index)">補滿</p>
-          <p class="qtybox" @click="zeroing(index)">歸零</p>
+          <!-- <p class="qtybox" @click="fillup(index)">補滿</p> -->
+          <!-- <p class="qtybox" @click="zeroing(index)">歸零</p> -->
         </div>
       </div>
     </div>
@@ -85,8 +87,7 @@ export default {
           this.product.productAwards[x].remain=this.product.productAwards[x].count
         }
         this.remain = this.product.count
-      })
-      
+      })      
   },
   plus(index){
     var num = this.product.productAwards
@@ -96,6 +97,20 @@ export default {
   minus(index){
     var num = this.product.productAwards
     num[index].remain>0?num[index].remain-=1:num[index].remain
+    this.prize_check()
+  },
+  full(){
+    // var num = this.product.productAwards
+    // console.log(num)
+    for(var x=0;x < this.product.productAwards.length;x++){
+      this.product.productAwards[x].remain=this.product.productAwards[x].count
+    }
+    this.prize_check()
+  },
+  zero(){
+    for(var x=0;x < this.product.productAwards.length;x++){
+      this.product.productAwards[x].remain=0
+    }
     this.prize_check()
   },
   fillup(index){
@@ -179,6 +194,13 @@ export default {
 }
 .pa_list picture img{
   width: 100%;
+}
+.qtyall{
+  user-select: none;
+  width: 40px;
+  height: 20px;
+  background: red;
+  margin: 5px auto;
 }
 .qtybox{
   user-select: none;

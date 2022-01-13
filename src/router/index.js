@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Kujiset from '../views/Kujiset.vue'
 import Privacy from '../views/Privacy.vue'
+import SliderKuji from '../views/SliderKuji.vue'
+
 
 const routes = [
   {
@@ -15,6 +17,12 @@ const routes = [
     name: 'Kujiset',
     component: Kujiset
     // component: () => import( '../views/Kujiset.vue')
+  },
+  {
+    path: '/SliderKuji',
+    name: 'SliderKuji',
+    component: SliderKuji
+    // component: () => import( '../views/SliderKuji.vue')
   },
   {
     path: '/Privacy',
