@@ -9,8 +9,11 @@
       <h5>發售日期: {{ this.product.saleDate }}</h5>
       <p>數量: {{ this.product.count }} 抽</p>
       <p>剩餘數量: {{ this.remain }} 抽</p>
-      <p class="qtyall" @click="full()">補滿</p>
-      <p class="qtyall" @click="zero()">歸零</p>
+      <div class="qtyall_box">
+        <p class="qtyall" @click="full()">補滿</p>
+        <p class="qtyall" @click="zero()">歸零</p>
+      </div>
+      <p class="lottery_list" @click="lottery_list_show()">抽獎紀錄</p>
     </div>
     <div class="productAwards">
       <div class="pa_list" v-for="(item, index) in product.productAwards" :key="index">
@@ -46,6 +49,12 @@
         </div> 
       <!-- </div>      -->
     </div>   
+    <div class="lottery_list_box" v-if="lottery_show">
+      <div class="lottery_list_box_content">
+        <p v-for="(item, index) in lottery_list" :key="index">{{item.Prize}}</p>
+      </div>
+      <p class="lottery_close" @click="lottery_close()" >關閉</p>
+    </div>
   <Button :BtnData="BtnData" :RouterData="RouterData"></Button>
   <Footer></Footer>
   </div>
@@ -72,6 +81,8 @@ export default {
       result:false,
       prize_result:'',
       result_num:true,
+      lottery_show:false,
+      lottery_list:[],
     }
   },
    mounted() {
@@ -137,9 +148,6 @@ export default {
       }
     }
     this.remain = this.prize.length
-    console.log(!this.result)
-    console.log(this.result_num)
-    console.log((!this.result)&this.result_num)
     if(this.remain==0){
       this.result_num=false
     }else{
@@ -158,11 +166,20 @@ export default {
         // console.log('抽獎')
         check[x].remain=check[x].remain-1
         this.prize_result={"Prize":check[x].award+'賞   '+check[x].name,"pictureUrl":check[x].pictureUrl}
+        this.lottery_list.push({"Prize":check[x].award+'賞   '+check[x].name})
       }
     }
+    console.log( this.lottery_list)
+    this.lottery_show=false
     this.prize_check()
     this.result=true
   },
+  lottery_list_show(){
+    this.lottery_show=true
+  },
+  lottery_close(){
+    this.lottery_show=false
+  }
 }
 
 }
@@ -185,6 +202,17 @@ export default {
 #mainkuji img{
   width: 100%;
 }
+.lottery_close{
+  margin: 0 auto;
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  background: cyan;
+  user-select: none;
+  transition: .5s all;
+}
 .productAwards{
   display: flex;
   /* flex-direction:column; */
@@ -204,12 +232,41 @@ export default {
 .pa_list picture img{
   width: 100%;
 }
+
+.qtyall_box{
+  display: flex;
+  justify-content: center;
+}
 .qtyall{
   user-select: none;
   width: 40px;
   height: 20px;
   background: red;
-  margin: 5px auto;
+  margin: 5px 5px 10px 5px;
+}
+.lottery_list{
+  user-select: none;
+  background: red;
+  height: 20px;
+  width: 80px;
+  margin: 10px auto;
+}
+.lottery_list_box{
+  background: red;
+  height: 300px;
+  width: 300px;
+  position: fixed;
+  right: 50%;
+  top: 50%;
+  margin: -150px -150px 0 0;
+  z-index: 100;  
+}
+.lottery_list_box_content{
+  height: 80%;
+  overflow :auto;
+}
+.lottery_list_box_content{
+  padding:0 5px;
 }
 .qtybox{
   user-select: none;
